@@ -445,6 +445,11 @@ class QRCode:
                     break
 
 ##### Web app #####
+def reg(value):
+    " function attribute is a way to access matching group in one line test "
+    reg.v = value
+    return value
+
 def app_update():
     "_"
     cd = 'cd %s; git pull origin' % os.path.dirname(os.path.abspath(__file__))
@@ -461,15 +466,18 @@ def application(environ, start_response):
     else: # get
         if base == '' and raw == '_update': 
             o = app_update()
+        elif reg(re.match('i=(\d)+&j=(\d+)', raw)):
+            o, mime = display(int(reg.v.group(1)), int(reg.v.group(2))), 'image/svg+xml'
         else:
             o, mime = display(), 'image/svg+xml'
     start_response('200 OK', [('Content-type', mime)])
     return [o if mime in ('application/pdf', 'image/png', 'image/svg+xml', 'image/jpg') else o.encode('utf8')] 
 
 
-def display():
+def display(nx=5, ny=10):
     qrs = 201503190000
-    o, k, nx, ny = '<svg %s width="1940" height="4760">\n' % _SVGNS, 0, 5, 10
+    o, k = '<svg %s width="1940" height="4760">\n' % _SVGNS, 0
+    o += '<text font-family="arial" font-size="9" x="20" y="20">%d colonnes %d lignes</text>' % (nx, ny)
     for j in range(ny):
         for i in range(nx):
             k += 1
