@@ -365,9 +365,9 @@ class QRCode:
             for c in range(mc):
                 if self.m[r][c]: k += 1
                 elif k > 0:
-                    o += '<rect style="fill:%s;stroke:none" x="%d" y="%d" width="%d" height="%d"/>\n' % (c2, ox+(c-k)*d, oy+r*d, k*d, d)
+                    o += '<rect style="fill:%s;stroke:%s" x="%d" y="%d" width="%d" height="%d"/>\n' % (c2, c2, ox+(c-k)*d, oy+r*d, k*d, d)
                     k = 0
-            if k > 0: o += '<rect style="fill:%s;stroke:none" x="%d" y="%d" width="%d" height="%d"/>\n' % (c2, ox+(mc-k)*d, oy+r*d, k*d, d)
+            if k > 0: o += '<rect style="fill:%s;stroke:%s" x="%d" y="%d" width="%d" height="%d"/>\n' % (c2, c2, ox+(mc-k)*d, oy+r*d, k*d, d)
         return o + '\n'
         
 
