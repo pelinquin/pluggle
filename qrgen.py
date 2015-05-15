@@ -356,7 +356,7 @@ class QRCode:
 
     def svg(self, ox=0, oy=0, d=2, txt='', alu=False):
         mc, o, (c1, c2) = self.m_count, '', ('black', 'white') if alu else ('white', 'blue')
-        #o += '<ellipse cx="%s" cy="%s" rx="180" ry="208" style="fill:none;stroke:grey;"/>' % (ox+104, oy+100)
+        #o += '<ellipse cx="%s" cy="%s" rx="180" ry="208" style="fill:none;stroke:grey"/>' % (ox+104, oy+100)
         o += '<ellipse cx="%s" cy="%s" rx="168" ry="196" style="fill:%s;stroke:grey"/>' % (ox+104, oy+100, c2)
         o += '<rect x="%s" y="%s" width="232" height="232" style="fill:%s"/>' % (ox-10, oy-10, c1)
         o += self.svg_color(ox, oy, txt, c1)
@@ -365,9 +365,9 @@ class QRCode:
             for c in range(mc):
                 if self.m[r][c]: k += 1
                 elif k > 0:
-                    o += '<rect fill="%s" x="%d" y="%d" width="%d" height="%d"/>\n' % (c2, ox+(c-k)*d, oy+r*d, k*d, d)
+                    o += '<rect style="fill:%s;stroke:none" x="%d" y="%d" width="%d" height="%d"/>\n' % (c2, ox+(c-k)*d, oy+r*d, k*d, d)
                     k = 0
-            if k > 0: o += '<rect fill="%s" x="%d" y="%d" width="%d" height="%d"/>\n' % (c2, ox+(mc-k)*d, oy+r*d, k*d, d)
+            if k > 0: o += '<rect style="fill:%s;stroke:none" x="%d" y="%d" width="%d" height="%d"/>\n' % (c2, ox+(mc-k)*d, oy+r*d, k*d, d)
         return o + '\n'
         
 
