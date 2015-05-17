@@ -484,9 +484,9 @@ def application(environ, start_response):
             #l1 = 'inkscape -E intermediate.eps qrgen.svg'
             #l2 = 'pstoedit -dt -f dxf:-polyaslines\ -mm intermediate.eps outfile.dxf'
             #out, err = subprocess.Popen((l1), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
-            p = subprocess.Popen(('inkscape', '-E'), stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-            for l in p.communicate(input=oo.encode('utf-8'))[0].decode('utf-8').split('\n'):
-                o += l
+            #p = subprocess.Popen(('inkscape', '-E'), stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+            #for l in p.communicate(input=oo.encode('utf-8'))[0].decode('utf-8').split('\n'):
+            #    o += l
             o = oo
     start_response('200 OK', [('Content-type', mime)])
     return [o if mime in ('application/pdf', 'image/png', 'image/svg+xml', 'image/jpg') else o.encode('utf8')] 
